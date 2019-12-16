@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'; // at the begining we are bringing logs to the components, it will change when we used Redux
 // useState hook will be used to be able to define a state in a functional component
 // useEffect so that we can be able to make our requests
-
+import LogItem from './LogItem';
+import Preloader from '../layout/Preloader';
 
 const Logs = () => {
     // creating our state
@@ -24,7 +25,7 @@ const Logs = () => {
     }
 
     if(loading){
-        return<h4>loading</h4>
+        return <Preloader />;
     }
     return (
         <ul className="collection with-header">
@@ -34,7 +35,7 @@ const Logs = () => {
         {
             !loading && logs.length ===0 ? (<p className= "center"> No Logs to Show</p>)
             :
-          logs.map(log => <li>{log.message}</li>)  
+          logs.map(log => <LogItem log={log} key ={log.id}/>)  
         }
             
         </ul>
