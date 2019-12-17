@@ -8,25 +8,28 @@ import AddLogModal from './components/logs/AddLogModal';
 import EditLogModal from './components/logs/EditLogModal';
 import AddTechModal from './components/techs/AddTechModal';
 import TechListModal from './components/techs/TechListModal';
-import './App.css';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const App = () => {
   useEffect(() => {
     //initialize materialize JS
     M.AutoInit();
   });
-  return (
-    <Fragment>
-      <SearchBar />
-      <div className='container'>
-        <AddBtn />
-        <AddLogModal />
-        <EditLogModal />
-        <AddTechModal />
-        <TechListModal/>
-        <Logs />
-      </div>
-    </Fragment>
+  return (// provider will take the store as a prop
+    <Provider store = {store}>  
+      <Fragment>
+        <SearchBar />
+        <div className='container'>
+          <AddBtn />
+          <AddLogModal />
+          <EditLogModal />
+          <AddTechModal />
+          <TechListModal />
+          <Logs />
+        </div>
+      </Fragment>
+    </Provider>
   );
 };
 
