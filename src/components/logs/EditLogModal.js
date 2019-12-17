@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js'; // in order to be able to do some error checking on the onSubmit
 import '../../App.css';
 
-const AddLogModal = () => {
+const EditLogModal = () => {
   //defining initial state
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
@@ -10,21 +10,18 @@ const AddLogModal = () => {
 
   //define onSubmit function
   const onSubmit = () => {
-      if(message === '' || tech ===''){
-        M.toast({html: 'Please enter a message and a tech'});
-      }
-     
-      else{
-        console.log(message, tech, attention);
-        // clear fields
-        setMessage('');
-        setTech('');
-        setAttention(false);
-      }
-
+    if (message === '' || tech === '') {
+      M.toast({ html: 'Please enter a message and a tech' });
+    } else {
+      console.log(message, tech, attention);
+      // clear fields
+      setMessage('');
+      setTech('');
+      setAttention(false);
+    }
   };
   return (
-    <div id='add-log-modal' className='modal modelStyle'>
+    <div id='edit-log-modal' className='modal modelStyle'>
       <div className='modal-content'>
         <h4>Enter System Log</h4>
         <div className='row'>
@@ -89,4 +86,4 @@ const AddLogModal = () => {
   );
 };
 
-export default AddLogModal; // to app.js
+export default EditLogModal; // to app.js
