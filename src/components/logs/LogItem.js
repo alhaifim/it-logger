@@ -32,4 +32,4 @@ const LogItem = ({ log }) => {
 LogItem.propTypes = {
   log: PropTypes.object.isRequired
 };
-export default LogItem;
+export default LogItem;  // add it to log.js

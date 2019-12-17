@@ -41,4 +41,4 @@ const Logs = () => {
         </ul>
     )
 }
-export default Logs;
+export default Logs; // add it to app.js
