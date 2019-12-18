@@ -1,5 +1,5 @@
 // first fetch the logs
-import { GET_LOGS, SET_LOADING, LOGS_ERROR } from './types';
+import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from './types';
 
 // create our actions
 //get logs from server
@@ -14,6 +14,35 @@ export const getLogs = () => async dispatch => {
 
     dispatch({
       type: GET_LOGS,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: err.response.data
+    });
+  }
+};
+
+//Add new log
+export const addLog = log => async dispatch => {
+  // we need to get an async call
+  // this is why we are using redux thunk
+  try {
+    SetLoading();
+
+    const res = await fetch('/logs', {
+      method: 'POST',
+      body: JSON.stringify(log),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    dispatch({
+      type: ADD_LOG,
       payload: data
     });
   } catch (err) {

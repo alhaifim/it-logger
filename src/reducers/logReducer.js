@@ -1,4 +1,4 @@
-import { GET_LOGS, SET_LOADING, LOGS_ERROR } from '../actions/types';
+import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from '../actions/types';
 
 // we do not have a state file like we did with contest, we define the intial state here
 const initialState = {
@@ -16,6 +16,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         logs: action.payload,
+        loading: false
+      };
+    case ADD_LOG:
+      return {
+        ...state,
+        logs: [...state.logs, action.payload], // state is immutable which means we can not push to it and that is why we put the array
         loading: false
       };
     case SET_LOADING:

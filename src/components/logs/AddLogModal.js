@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import M from 'materialize-css/dist/js/materialize.min.js'; // in order to be able to do some error checking on the onSubmit
 import '../../App.css';
+import { addLog } from '../../actions/logActions';
 
-const AddLogModal = () => {
+const AddLogModal = ({ addLog }) => {
+  // pass it as a prop
   //defining initial state
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
@@ -10,18 +14,22 @@ const AddLogModal = () => {
 
   //define onSubmit function
   const onSubmit = () => {
-      if(message === '' || tech ===''){
-        M.toast({html: 'Please enter a message and a tech'});
+    if (message === '' || tech === '') {
+      M.toast({ html: 'Please enter a message and a tech' });
+    } else {
+      const newLog = {
+        message,
+        attention,
+        tech,
+        date: new Date()
       }
-     
-      else{
-        console.log(message, tech, attention);
-        // clear fields
-        setMessage('');
-        setTech('');
-        setAttention(false);
-      }
-
+      addLog(newLog);
+      M.toast({html: `log added by ${tech}`});
+      // clear fields
+      setMessage('');
+      setTech('');
+      setAttention(false);
+    }
   };
   return (
     <div id='add-log-modal' className='modal modelStyle'>
@@ -88,5 +96,9 @@ const AddLogModal = () => {
     </div>
   );
 };
+AddLogModal.propTypes = {
+  addLog: PropTypes.func.isRequired
+};
 
-export default AddLogModal; // to app.js
+export default connect(null, { addLog })(AddLogModal); // to app.js
+// as we are not bringing any state and we need only action, we put state to null
