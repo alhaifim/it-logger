@@ -16,8 +16,9 @@ const App = () => {
     //initialize materialize JS
     M.AutoInit();
   });
-  return (// provider will take the store as a prop
-    <Provider store = {store}>  
+  return (
+    // provider will take the store as a prop
+    <Provider store={store}>
       <Fragment>
         <SearchBar />
         <div className='container'>

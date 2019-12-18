@@ -1,30 +1,22 @@
-import React, {useState, useEffect} from 'react'; // at the begining we are bringing logs to the components, it will change when we used Redux
-// useState hook will be used to be able to define a state in a functional component
+import React, {useEffect} from 'react'; // at the begining we are bringing logs to the components, it will change when we used Reduxt
 // useEffect so that we can be able to make our requests
+// whenever you need to interact with redux from a component we need to bring connect
+import {connect } from 'react-redux';
 import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';
+import PropTypes from 'prop-types';
+import {getLogs} from '../../actions/logActions';
 
-const Logs = () => {
-    // creating our state
-    const [logs, setLogs] = useState([]);
-    const [loading, setLoading] = useState(false);
+const Logs = ({log: {logs, loading}, getLogs}) => {
 
     useEffect(()=>{
         getLogs();
         //eslint-disable-next-line
-    }, [])
+    }, []);
 
-    const getLogs = async () => {
-        setLoading(true);
-        // we will use fetch api instead of axios 
-        const res = await fetch('/logs'); // as we already have a proxy
-        const data = await res.json(); // this will give us data formated in json
+   
 
-        setLogs(data);
-        setLoading(false);
-    }
-
-    if(loading){
+    if(loading || logs === null){
         return <Preloader />;
     }
     return (
@@ -41,4 +33,13 @@ const Logs = () => {
         </ul>
     )
 }
-export default Logs; // add it to app.js
+
+Logs.propTypes={
+    log: PropTypes.object.isRequired
+}
+const mapStateToProps = state => ({
+   // here we are bring the whole state and destructure on the definition above 
+    log:   state.log                             // the firs log is the name of the prop can be called anything.  the second refers to the 
+                                                 // root reducer which is under reducers/index.js
+})
+export default connect(mapStateToProps, {getLogs})(Logs); // add it to app.js we will add getLogs so that it can run

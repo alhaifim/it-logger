@@ -1,26 +1,8 @@
 // first fetch the logs
 import { GET_LOGS, SET_LOADING, LOGS_ERROR } from './types';
 
-// // create our actions
-// export const getLogs = () => {
-//     // we need to get an async call
-//     // this is why we are using redux thunk
-//     return (dispatch)=>{
-//        SetLoading();
-
-//        const res = await fetch('/logs');
-//        const data = await res.json();
-
-//     dispatch({
-//         type: GET_LOGS,
-//         payload: data
-//     })
-
-//     }
-
-// alternative way
-
 // create our actions
+//get logs from server
 export const getLogs = () => async dispatch => {
   // we need to get an async call
   // this is why we are using redux thunk
