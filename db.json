@@ -1,13 +1,6 @@
 {
   "logs": [
     {
-      "message": "Change network card in server 007",
-      "attention": true,
-      "tech": "Sam Smith",
-      "date": "2019-12-18T21:18:03.863Z",
-      "id": 1
-    },
-    {
       "message": "Hard drive failed in workstation 002",
       "attention": true,
       "tech": "Sara Wilson",
@@ -20,6 +13,13 @@
       "tech": "John Doe",
       "date": "2019-12-18T21:19:02.725Z",
       "id": 3
+    },
+    {
+      "message": "Computer with ID 0034 is down",
+      "attention": true,
+      "tech": "Sam Smith",
+      "date": "2019-12-20T05:00:40.690Z",
+      "id": 4
     }
   ],
   "techs": [
