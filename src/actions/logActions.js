@@ -5,6 +5,7 @@ import {
   LOGS_ERROR,
   ADD_LOG,
   DELETE_LOG,
+  SEARCH_LOGS,
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_LOG
@@ -99,11 +100,33 @@ export const updateLog = log => async dispatch => {
         'Content-Type': 'application/json'
       }
     });
-    
-        const data = await res.json();
+
+    const data = await res.json();
 
     dispatch({
       type: UPDATE_LOG,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: err.response.data
+    });
+  }
+};
+
+//search logs from server
+export const searchLogs = text => async dispatch => {
+  // we need to get an async call
+  // this is why we are using redux thunk
+  try {
+    SetLoading();
+
+    const res = await fetch(`/logs?q=${text}`);
+    const data = await res.json();
+
+    dispatch({
+      type: SEARCH_LOGS,
       payload: data
     });
   } catch (err) {
