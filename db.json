@@ -1,11 +1,11 @@
 {
   "logs": [
     {
-      "message": "Hard drive failed in workstation 002",
-      "attention": true,
-      "tech": "Sara Wilson",
-      "date": "2019-12-18T21:18:38.829Z",
-      "id": 2
+      "id": 2,
+      "message": "Fixed hard drive failed in workstation 002",
+      "attention": false,
+      "tech": "Sam Smith",
+      "date": "2019-12-20T07:09:01.330Z"
     },
     {
       "message": "1144 wireless down ",

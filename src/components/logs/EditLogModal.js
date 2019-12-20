@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js'; // in order to be able to do some error checking on the onSubmit
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { updateLog } from '../../actions/logActions';
 import '../../App.css';
 
-const EditLogModal = () => {
+const EditLogModal = ({ current, updateLog }) => {
   //defining initial state
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState('');
+
+  useEffect(() => {
+    if (current) {
+      setMessage(current.message);
+      setAttention(current.attention);
+      setTech(current.tech);
+    }
+  }, [current]);
 
   //define onSubmit function
   const onSubmit = () => {
     if (message === '' || tech === '') {
       M.toast({ html: 'Please enter a message and a tech' });
     } else {
-      console.log(message, tech, attention);
+      const updLog = {
+        id: current.id,
+        message,
+        attention,
+        tech,
+        date: new Date()
+      };
+      updateLog(updLog);
+      M.toast({ html: `Log updated by ${tech}` });
       // clear fields
       setMessage('');
       setTech('');
@@ -32,9 +51,6 @@ const EditLogModal = () => {
               value={message}
               onChange={e => setMessage(e.target.value)}
             />
-            <label htmlFor='message' className='active'>
-              Log Message
-            </label>
           </div>
         </div>
         <div className='row'>
@@ -85,5 +101,11 @@ const EditLogModal = () => {
     </div>
   );
 };
-
-export default EditLogModal; // to app.js
+EditLogModal.propTypes = {
+  current: PropTypes.object,
+  updateLog: PropTypes.func.isRequired
+};
+const mapStateToProps = state => ({
+  current: state.log.current
+});
+export default connect(mapStateToProps, { updateLog })(EditLogModal); // to app.js
