@@ -1,4 +1,4 @@
- // at the begining we are bringing logs to the components, it will change when we used Redux
+// at the begining we are bringing logs to the components, it will change when we used Redux
 // useState hook will be used to be able to define a state in a functional component
 // useEffect so that we can be able to make our requests
 import React, { useEffect } from 'react';
@@ -27,11 +27,8 @@ const TechListModal = ({ getTechs, tech: { techs, loading } }) => {
   );
 };
 
-  const mapStateToProps = state => ({
-    tech: state.tech
-  });
-  
-  export default connect(
-    mapStateToProps,
-    { getTechs }
-  )(TechListModal);
+const mapStateToProps = state => ({
+  tech: state.tech
+});
+
+export default connect(mapStateToProps, { getTechs })(TechListModal);

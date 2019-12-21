@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TechSelectOptions from '../techs/TechSelectOptions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import M from 'materialize-css/dist/js/materialize.min.js'; // in order to be able to do some error checking on the onSubmit
@@ -22,9 +23,9 @@ const AddLogModal = ({ addLog }) => {
         attention,
         tech,
         date: new Date()
-      }
+      };
       addLog(newLog);
-      M.toast({html: `log added by ${tech}`});
+      M.toast({ html: `log added by ${tech}` });
       // clear fields
       setMessage('');
       setTech('');
@@ -60,9 +61,7 @@ const AddLogModal = ({ addLog }) => {
                 {' '}
                 Select Technician
               </option>
-              <option value='John Doe'>John Doe</option>
-              <option value='Sam Smith'>Sam Smith</option>
-              <option value='Sara Wilson'>Sara Wilson</option>
+              <TechSelectOptions />
             </select>
           </div>
         </div>
